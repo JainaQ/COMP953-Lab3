@@ -61,7 +61,7 @@ def process_sales_data(sales_csv, orders_dir):
         order_df.sort_values(by='ITEM NUMBER', inplace=True)
 
         # Append a "GRAND TOTAL" row
-        grand_total = order_df("TOTAL PRICE").sum()
+        grand_total = order_df["TOTAL PRICE"].sum()
         grand_total_df = pd.DataFrame({'ITEM PRICE': ['GRAND TOTAL'], 'TOTAL PRICE': [grand_total]})
         order_df = pd.concat([order_df, grand_total_df])
 
@@ -78,11 +78,10 @@ def export_order_to_excel(order_id, order_df, orders_dir):
 
 # Export the data to an Excel sheet
     sheet_name = f'Order #{order_id}'
-    writer = pd.ExcelWriter("pandas_column_formats.xlsx", engine='xlsxwriter')
-    order_df.to.excel(order_path, index=False, sheet_name=sheet_name)
+    order_df.to_excel(order_path, index=False, sheet_name=sheet_name)
 
 # TODO: Format the Excel sheet
-    
+
     return
 
 if __name__ == '__main__':
